@@ -1,4 +1,4 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Header from "./components/Header";
 import AutocompleteSelect from "./components/AutocompleteSelect";
 import Textfield from "./components/Textfield";
@@ -20,6 +20,14 @@ function App() {
 					// onSubmit={handleSubmit}
 					noValidate
 					gap={2}>
+					<Typography
+						variant='caption'
+						color='inherit'
+						component='span'
+						sx={{ fontFamily: "Monospace" }}>
+						Used for converting the crypto currency (Bitcoin, Ethereum, etc) to
+						selected currency (EUR, USD, etc)
+					</Typography>
 					<AutocompleteSelect />
 					<AutocompleteSelect />
 					<Textfield />
