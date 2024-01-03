@@ -1,16 +1,21 @@
 import { Autocomplete, FormControl, TextField } from "@mui/material";
-import dummyList from "./dummy-data.json";
 import React from "react";
 
-const AutocompleteSelect = () => {
-	console.log(dummyList);
+const AutocompleteSelect = ({ name, label, optionList, form, setForm }) => {
+	const handleChange = (value) => {
+		setForm({ ...form, [name]: value });
+	};
 	return (
 		<FormControl fullWidth>
 			<Autocomplete
+				name={name}
 				disablePortal
-				id='combo-box-demo'
-				options={dummyList}
-				renderInput={(params) => <TextField {...params} label='Currency' />}
+				id={name}
+				options={optionList}
+				getOptionLabel={(option) => `${option.name} (${option.symbol})`}
+				// defaultValue={optionList.find((option) => option.symbol ===)}
+				renderInput={(params) => <TextField {...params} label={label} />}
+				onChange={(e, value) => handleChange(value)}
 			/>
 		</FormControl>
 	);

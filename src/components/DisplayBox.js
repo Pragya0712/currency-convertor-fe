@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const DisplayBox = () => {
+const DisplayBox = ({ amount, symbol }) => {
 	return (
 		<Box
 			component='span'
@@ -16,7 +16,7 @@ const DisplayBox = () => {
 				color='inherit'
 				component='span'
 				sx={{ fontWeight: "bold", fontFamily: "Monospace" }}>
-				85876.41796080966
+				{amount}
 			</Typography>
 			<Typography
 				variant='subtitle2'
@@ -24,7 +24,7 @@ const DisplayBox = () => {
 				component='span'
 				sx={{ fontFamily: "Monospace" }}>
 				{" "}
-				USD
+				{symbol}
 			</Typography>
 		</Box>
 	);
