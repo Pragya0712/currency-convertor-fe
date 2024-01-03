@@ -2,6 +2,7 @@ import { Box, Button, Container } from "@mui/material";
 import Header from "./components/Header";
 import AutocompleteSelect from "./components/AutocompleteSelect";
 import Textfield from "./components/Textfield";
+import DisplayBox from "./components/DisplayBox";
 
 function App() {
 	return (
@@ -22,12 +23,8 @@ function App() {
 					<AutocompleteSelect />
 					<AutocompleteSelect />
 					<Textfield />
-					<Button
-						size='large'
-						type='submit'
-						fullWidth
-						variant='contained'
-						sx={{ mt: 5 }}>
+					<DisplayBox />
+					<Button size='large' type='submit' fullWidth variant='contained'>
 						Convert
 					</Button>
 				</Box>
