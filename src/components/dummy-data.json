@@ -1,0 +1,26 @@
+[
+	{
+		"id": 2781,
+		"label": "United States Dollar",
+		"sign": "$",
+		"symbol": "USD"
+	},
+	{
+		"id": 2782,
+		"label": "Australian Dollar",
+		"sign": "$",
+		"symbol": "AUD"
+	},
+	{
+		"id": 2783,
+		"label": "Brazilian Real",
+		"sign": "R$",
+		"symbol": "BRL"
+	},
+	{
+		"id": 2784,
+		"label": "Canadian Dollar",
+		"sign": "$",
+		"symbol": "CAD"
+	}
+]
