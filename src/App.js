@@ -1,23 +1,32 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import { Box, Button, Container } from "@mui/material";
+import Header from "./components/Header";
 
 function App() {
 	return (
 		<div>
-			<AppBar position='static'>
-				<Toolbar variant='dense'>
-					<IconButton
-						edge='start'
-						color='inherit'
-						aria-label='menu'
-						sx={{ mr: 1 }}>
-						<CurrencyExchangeIcon />
-					</IconButton>
-					<Typography variant='h6' color='inherit' component='div'>
-						Currency Convertor
-					</Typography>
-				</Toolbar>
-			</AppBar>
+			<Header />
+			<Container component='main' maxWidth='xs'>
+				<Box
+					sx={{
+						marginTop: 15,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+					component='form'
+					// onSubmit={handleSubmit}
+					noValidate
+					gap={2}>
+					<Button
+						size='large'
+						type='submit'
+						fullWidth
+						variant='contained'
+						sx={{ mt: 5 }}>
+						Convert
+					</Button>
+				</Box>
+			</Container>
 		</div>
 	);
 }
