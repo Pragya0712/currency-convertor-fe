@@ -1,6 +1,7 @@
 import { Box, Button, Container } from "@mui/material";
 import Header from "./components/Header";
 import AutocompleteSelect from "./components/AutocompleteSelect";
+import Textfield from "./components/Textfield";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					gap={2}>
 					<AutocompleteSelect />
 					<AutocompleteSelect />
+					<Textfield />
 					<Button
 						size='large'
 						type='submit'
