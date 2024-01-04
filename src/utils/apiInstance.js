@@ -11,7 +11,7 @@ export const apicall = async (
 			"Access-Control-Allow-Origin": "*",
 		},
 	},
-	baseURL = "http://localhost:4000/api/v1"
+	baseURL = process.env.REACT_APP_BASE_URL
 ) => {
 	return await axios({
 		method,
