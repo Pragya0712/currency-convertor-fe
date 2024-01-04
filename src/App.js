@@ -1,21 +1,23 @@
-import { Box, Button, Container, Typography } from "@mui/material";
 import Header from "./components/Header";
-import AutocompleteSelect from "./components/AutocompleteSelect";
-import Textfield from "./components/Textfield";
-import DisplayBox from "./components/DisplayBox";
 import { useEffect, useState } from "react";
-import { convert, listCryptoCurrencies, listCurrencies } from "./api/apicalls";
+import { listCryptoCurrencies, listCurrencies } from "./api/apicalls";
+import Form from "./components/Form";
+import ConvertorContext from "./context/Convertor";
+import { Box, CircularProgress, Container } from "@mui/material";
+import Alert from "./components/Alert";
 
 function App() {
 	const [loading, setLoading] = useState(true);
 	const [currencies, setCurrencies] = useState([]);
 	const [cryptoCurrencies, setCryptoCurrencies] = useState([]);
-	const [form, setForm] = useState({
-		currency: "",
-		crypto: "",
-		amount: "",
-	});
-	const [displayAmt, setDisplayAmt] = useState();
+	const [alert, setAlert] = useState(false);
+
+	const showAlert = () => {
+		setAlert(true);
+		setTimeout(() => {
+			setAlert(false);
+		}, 3000);
+	};
 
 	const fetchCurrencyList = async () => {
 		try {
@@ -23,7 +25,7 @@ function App() {
 			const currencyList = response.data || [];
 			setCurrencies(currencyList);
 		} catch (error) {
-			console.log(error);
+			showAlert();
 		}
 	};
 
@@ -33,7 +35,7 @@ function App() {
 			const currencyList = response.data || [];
 			setCryptoCurrencies(currencyList);
 		} catch (error) {
-			console.log(error);
+			showAlert();
 		}
 	};
 
@@ -48,70 +50,32 @@ function App() {
 		}
 	}, [currencies, cryptoCurrencies]);
 
-	// console.log(loading, cryptoCurrencies, currencies);
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const currency_id = form?.currency?.id;
-		const amount = form?.amount;
-		const crypto_symbol = form?.crypto?.symbol;
-		const response = await convert(currency_id, amount, crypto_symbol);
-		setDisplayAmt(response?.data?.amount);
-		console.log(response);
-	};
-
 	return (
-		<div>
+		<ConvertorContext.Provider
+			value={{ currencies, cryptoCurrencies, showAlert }}>
 			<Header />
+			{alert && (
+				<Alert
+					type={`warning`}
+					label={`Unable to process request — Please try again later!`}
+				/>
+			)}
 			<Container component='main' maxWidth='xs'>
-				<Box
-					sx={{
-						marginTop: 15,
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-					}}
-					component='form'
-					onSubmit={handleSubmit}
-					noValidate
-					gap={2}>
-					<Typography
-						variant='caption'
-						color='inherit'
-						component='span'
-						sx={{ fontFamily: "Monospace" }}>
-						Used for converting the crypto currency (Bitcoin, Ethereum, etc) to
-						selected currency (EUR, USD, etc)
-					</Typography>
-					<AutocompleteSelect
-						name={`crypto`}
-						label={`Cryptocurrency`}
-						optionList={cryptoCurrencies}
-						form={form}
-						setForm={setForm}
-					/>
-					<AutocompleteSelect
-						name={`currency`}
-						label={`Currency`}
-						optionList={currencies}
-						form={form}
-						setForm={setForm}
-					/>
-					<Textfield
-						name={`amount`}
-						label={`Amount`}
-						symbol={form?.crypto?.symbol}
-						form={form}
-						setForm={setForm}
-					/>
-					{displayAmt && (
-						<DisplayBox amount={displayAmt} symbol={form?.currency?.symbol} />
-					)}
-					<Button size='large' type='submit' fullWidth variant='contained'>
-						Convert
-					</Button>
-				</Box>
+				{!loading ? (
+					<Form />
+				) : (
+					<Box
+						sx={{
+							marginTop: "50%",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}>
+						<CircularProgress />
+					</Box>
+				)}
 			</Container>
-		</div>
+		</ConvertorContext.Provider>
 	);
 }
 

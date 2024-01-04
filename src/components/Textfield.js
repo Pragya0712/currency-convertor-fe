@@ -1,7 +1,7 @@
 import { FormControl, InputAdornment, OutlinedInput } from "@mui/material";
 import React from "react";
 
-const Textfield = ({ name, symbol, form, setForm }) => {
+const Textfield = ({ name, symbol, label, form, setForm }) => {
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setForm({ ...form, [name]: value });
@@ -10,8 +10,10 @@ const Textfield = ({ name, symbol, form, setForm }) => {
 	return (
 		<FormControl fullWidth variant='outlined'>
 			<OutlinedInput
+				required
 				id='outlined-adornment-weight'
 				name={name}
+				placeholder={label}
 				type='number'
 				endAdornment={<InputAdornment position='end'>{symbol}</InputAdornment>}
 				aria-describedby='outlined-weight-helper-text'

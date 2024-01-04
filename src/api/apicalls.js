@@ -12,8 +12,8 @@ export const listCryptoCurrencies = async () => {
 
 export const convert = async (currency_id, amount, crypto_symbol) => {
 	let response = await apicall(
-		`/currencies/crypto?currency_id=${currency_id}&amount=${amount}&crypto_symbol=${crypto_symbol}`,
-		"post"
+		`/currencies/conversion?currency_id=${currency_id}&amount=${amount}&crypto_symbol=${crypto_symbol}`,
+		"get"
 	);
 	return response.data;
 };
